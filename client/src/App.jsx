@@ -1,12 +1,16 @@
 import './App.css'
+import {style} from './css'
+import MainContainer from './components/MainContainer'
 
 function App() {
 
 
   return (
-    <>
-     <h1>chat App</h1>
-    </>
+ 
+     <div className={"App " + style.appDiv}>
+      <MainContainer/>
+     </div>
+  
   )
 }
 
