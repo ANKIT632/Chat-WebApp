@@ -8,8 +8,15 @@ import { IoMdMoon } from "react-icons/io";
 import { FiSearch } from "react-icons/fi";
 import FriendList from './FriendList';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import {useSelector} from 'react-redux'
 
 function SideBar() {
+   const navigate=useNavigate();
+
+  
+//    console.log("theme",useSelector((state)=>state.themeKey));
+
   const [conversations ,setConversation]=useState([
     {
         name:"Test1",
@@ -28,6 +35,13 @@ function SideBar() {
     }
   ])
 
+  // handler Navigate
+
+  const navigateHandler=(path)=>{
+    console.log(path)
+        navigate(path);
+  }
+
     return (
         <div className={style.SideBarContainer}>
 
@@ -35,11 +49,12 @@ function SideBar() {
                 <div >
                     <MdAccountCircle className={style.icon} />
                 </div>
-                <div className='flex'>
-                    <IoMdPersonAdd className={style.icon} />
-                    <AiOutlineUsergroupAdd className={style.icon} />
-                    <IoIosAddCircle className={style.icon} />
-                    <IoMdMoon className={style.icon} />
+                <div className='flex max-sm:flex-col max-sm:justify-between max-sm:gap-2'>
+                    <IoMdPersonAdd className={style.icon} onClick={()=>navigateHandler('users')} />
+                    <AiOutlineUsergroupAdd className={style.icon} onClick={()=>navigateHandler('groups')} />
+                    <IoIosAddCircle className={style.icon} onClick={()=>navigateHandler('create-group')} />
+                    
+                    {/* <IoMdMoon className={style.icon} onClick={()=>navigateHandler('')} /> */}
                 </div>
 
 
@@ -53,9 +68,8 @@ function SideBar() {
 
             <div className={style.sideBarFriendList}>
 
-            {   conversations.map((conversation,idx)=><FriendList key={idx} props={conversation}/>)
+            {   conversations.map((conversation,idx)=><FriendList key={idx} props={conversation} />)
                 
-
             }    
             </div>
 

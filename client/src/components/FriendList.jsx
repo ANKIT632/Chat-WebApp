@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from 'react-router-dom';
 import { style } from '../css';
 
 function FriendList({ props }) {
+
+    const navigate=useNavigate();
     return (
-        <div className={style.FriendListContainer}>
+        <div className={style.FriendListContainer} onClick={()=>navigate('chat')}>
 
             <div className={style.ProfileIcon}>
                 <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />

@@ -5,7 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      transform: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+      transition: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    },
   },
   plugins: [],
 }

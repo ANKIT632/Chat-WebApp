@@ -28,7 +28,7 @@ function Login() {
                             className='absolute inset-y-0   right-0 pr-3 flex items-center cursor-pointer '
                             onClick={() => setShowPassword(!showPassword)}
                         >
-                            {showPassword ? <FiEyeOff /> : <FiEye />}
+                            {showPassword ?  <FiEye />:<FiEyeOff />}
                         </div>
                     </div>
                     <button type='submit' className=' shadow border text-green-500 font-semibold h-8 rounded-md active:bg-slate-100 hover:bg-slate-50'>Login</button>
