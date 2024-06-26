@@ -27,4 +27,4 @@ const chatSchema=new Schema({
   }
 },{timestamps:true})
 
-module.exports= Model("Chat",chatSchema);
+module.exports= model("Chat",chatSchema);
