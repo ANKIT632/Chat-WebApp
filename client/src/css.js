@@ -6,7 +6,7 @@ const style = {
 
   //sideBar style
   SideBarContainer: "sm:flex-[0.25] rounded-l-lg max-sm:m-1 flex flex-col  ",
-  SideBarHeader: " flex  bg-white shadow-sm rounded-lg p-1 justify-between sm:m-1.5 max-sm:flex-col  max-sm:h-full",
+  SideBarHeader: " flex  bg-white shadow rounded-lg p-1 justify-between sm:m-1.5 max-sm:flex-col  max-sm:h-full",
   SideBarSearch: " flex bg-white m-1.5 p-1 rounded-full shadow max-sm:hidden",
   sideBarFriendList: "flex-1 flex-col   bg-white m-1.5 p-1 rounded-lg shadow max-sm:hidden",
 
@@ -31,7 +31,7 @@ const style = {
   icon: "text-2xl text-gray-500 rounded-full shadow hover:bg-gray-200 cursor-pointer m-0.5 p-0.5 active:bg-gray-300 md:text-3xl",
 
   // welcome page
-  WelcomePageContainer: " flex flex-col justify-center items-center flex-[0.75] gap-4 border-b border-b-8 border-blue-300  rounded-xl   p-4  w-[80%] md:w-[40%] ",
+  WelcomePageContainer: " flex flex-col justify-center items-center sm:flex-[0.75] gap-4 border-b border-b-8 border-blue-300  rounded-xl   p-4  w-[80%] md:w-[40%] max-sm:flex-1",
 
   // create group style 
   CreateGroupContainer: "flex sm:flex-[0.75]   justify-center items-center mr-2 max-sm:flex-1",

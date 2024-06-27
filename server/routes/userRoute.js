@@ -1,9 +1,11 @@
 const express = require('express');
-const  {registerController,loginController} =require('../Controllers/userController')
+const  {registerController,loginController,fetchAllUsersController} =require('../Controllers/userController')
+const {verifyJwtToken} = require('../Middlewares/authMiddleware')
 
 const router=express.Router();
 
 router.post('/login',loginController);
 router.post('/register',registerController);
+router.get('/fetchUsers',verifyJwtToken,fetchAllUsersController);
 
 module.exports=router;

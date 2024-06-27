@@ -50,11 +50,15 @@ const loginController =async (req, res) => {
   try{
   const {name,password}=req.body;
 
+  if (!name ||  !password) {
+    return res.status(400).json({ status: false, message: "All necessary input fields must be filled" });
+}
+
   const user=await UserModel.findOne({name});
    
  
   if(user && await user.matchPassword(password)){
-    return res.status(201).json({
+    return res.status(200).json({
         status: true, message: "login success", data: {
             _id: user._id,
             name: user.name,
@@ -77,5 +81,27 @@ const loginController =async (req, res) => {
 }
 
 
+const fetchAllUsersController=async(req,res)=>{
+  try{
+    const keyword=req.query.search ? {
+      $or:[
+        {name:{$regex :req.query.search, $options:"i" }},
+        {email:{$regex :req.query.search, $options:"i" }},
+      
+      ]
+     
+    }:{};
 
-module.exports = { loginController, registerController }
+    const user =await UserModel.find(keyword).find(({_id:{$ne:req.user._id},})).select('-password');
+
+    return res.status(200).json({status:true,users:user});
+  }
+  catch(err){
+    return res.status(500).json({status:false,err})
+  }
+
+}
+
+
+
+module.exports = { loginController, registerController,fetchAllUsersController }
