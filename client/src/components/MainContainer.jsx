@@ -1,21 +1,19 @@
+import { createContext, useState } from 'react';
 import { style } from '../css';
 import SideBar from './SideBar';
-import ChatArea from './ChatArea';
-import WelcomePage from './WelcomePage';
-import CreateGroup from './CreateGroup';
-import UsersGroup from './Groups';
 import { Outlet } from 'react-router-dom';
+// import { useDispatch, useSelector } from "react-redux";
+
+export const myContext = createContext();
 
 function MainContainer() {
+  const [refresh, setRefresh] = useState(true);
   return (
     <div className={style.mainContainer}>
+          <myContext.Provider value={{ refresh: refresh, setRefresh: setRefresh }}>
       <SideBar/>
       <Outlet/>
-
-      {/* <ChatArea/> */}
-      {/* <WelcomePage/> */}
-      {/* <CreateGroup/> */}
-      {/* <UsersGroup/> */}
+      </myContext.Provider>
     </div>
   )
 }

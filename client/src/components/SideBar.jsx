@@ -7,40 +7,65 @@ import { IoIosSunny } from "react-icons/io";
 import { IoMdMoon } from "react-icons/io";
 import { FiSearch } from "react-icons/fi";
 import FriendList from './FriendList';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-// import {useSelector} from 'react-redux'
+import axios from 'axios';
+import { myContext } from "./MainContainer";
+
 
 function SideBar() {
-   const navigate=useNavigate();
 
-  
-//    console.log("theme",useSelector((state)=>state.themeKey));
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-  const [conversations ,setConversation]=useState([
-    {
-        name:"Test1",
-        lastMessage:"Last message 1",
-        timeStamp:"today"
-    },
-    {
-        name:"Test 2",
-        lastMessage:"Last message 2",
-        timeStamp:"today"
-    },
-    {
-        name:"Test 3",
-        lastMessage:"Last message 3",
-        timeStamp:"today"
+    const { refresh, setRefresh } = useContext(myContext);
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+
+    const [conversations, setConversations] = useState([]);
+
+    if (!userData) {
+        navigate('/');
     }
-  ])
 
-  // handler Navigate
 
-  const navigateHandler=(path)=>{
-    console.log(path)
+
+    const fetchChat = async () => {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userData.token}`
+            }
+        }
+        try {
+
+            const res = await axios.get('http://localhost:5000/chat/', config);
+            setConversations(res.data);
+        }
+
+        catch (err) {
+            console.log(err);
+        }
+
+    }
+
+
+    useEffect(() => {
+        fetchChat();
+    }, [refresh])
+
+
+    //    console.log("theme",useSelector((state)=>state.themeKey));
+
+
+
+    // handler Navigate
+
+    const navigateHandler = (path) => {
+        console.log(path)
         navigate(path);
-  }
+    }
 
     return (
         <div className={style.SideBarContainer}>
@@ -50,10 +75,10 @@ function SideBar() {
                     <MdAccountCircle className={style.icon} />
                 </div>
                 <div className='flex max-sm:flex-col max-sm:justify-between max-sm:gap-2'>
-                    <IoMdPersonAdd className={style.icon} onClick={()=>navigateHandler('users')} />
-                    <AiOutlineUsergroupAdd className={style.icon} onClick={()=>navigateHandler('groups')} />
-                    <IoIosAddCircle className={style.icon} onClick={()=>navigateHandler('create-group')} />
-                    
+                    <IoMdPersonAdd className={style.icon} onClick={() => navigateHandler('users')} />
+                    <AiOutlineUsergroupAdd className={style.icon} onClick={() => navigateHandler('groups')} />
+                    <IoIosAddCircle className={style.icon} onClick={() => navigateHandler('create-group')} />
+
                     {/* <IoMdMoon className={style.icon} onClick={()=>navigateHandler('')} /> */}
                 </div>
 
@@ -68,9 +93,58 @@ function SideBar() {
 
             <div className={style.sideBarFriendList}>
 
-            {   conversations.map((conversation,idx)=><FriendList key={idx} props={conversation} />)
-                
-            }    
+                {conversations.map((conversation, idx) => 
+                {
+                    if (conversation.users.length === 1) {
+            return <div key={idx}></div>;
+          }            
+
+                  if (conversation.latestMessage === undefined) {
+                    return(
+                <div className={style.FriendListContainer} onClick={() => navigate(
+                      "chat/" +
+                        conversation._id +
+                        "&" +
+                        conversation.users[1].name
+                    )} key={idx}>
+
+                    <div className={style.ProfileIcon}>
+                        <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />
+                    </div>
+                    <div className=" flex flex-1 flex-col t text-xs justify-center">
+                        <span className='font-semibold text-gray-600'>{conversation.users[1].name}</span>
+                        <span className='text-xs text-gray-500 '>{"   No previous Messages, click here to start a new chat"}</span>
+                    </div>
+                    {/* <div className="  text-end text-xs text-gray-400   self-end ">
+                        {conversation.timeStamp}
+                    </div> */}
+                  </div>)}
+                  else{
+                    return(
+                        <div className={style.FriendListContainer} onClick={() => navigate(
+                      "chat/" +
+                        conversation._id +
+                        "&" +
+                        conversation.users[1].name
+                    )} key={idx}>
+
+                    <div className={style.ProfileIcon}>
+                        <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />
+                    </div>
+                    <div className=" flex flex-1 flex-col t text-xs justify-center">
+                        <span className='font-semibold text-gray-600'>{conversation.users[1].name}</span>
+                        <span className='text-xs text-gray-500 '>                  {conversation.latestMessage.content}
+</span>
+                    </div>
+                    {/* <div className="  text-end text-xs text-gray-400   self-end ">
+                        {conversation.timeStamp}
+                    </div> */}
+                  </div>
+                    )
+                  }
+                })
+
+                }
             </div>
 
         </div>

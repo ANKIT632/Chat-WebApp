@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 const cors=require('cors');
 const UserRouter=require('./routes/userRoute.js');
+const chatRoute=require('./routes/chatRoute.js')
 
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/user',UserRouter);
+app.use('/chat',chatRoute);
 
 app.listen(process.env.PORT,(err)=>{
   if(!err)  

@@ -1,4 +1,4 @@
-const {Model,Schema}=require('mongoose');
+const {model,Schema,default:mongoose}=require('mongoose');
 
 const messageSchema= new Schema({
 
