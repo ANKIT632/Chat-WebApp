@@ -93,55 +93,53 @@ function SideBar() {
 
             <div className={style.sideBarFriendList}>
 
-                {conversations.map((conversation, idx) => 
-                {
+                {conversations.map((conversation, idx) => {
                     if (conversation.users.length === 1) {
-            return <div key={idx}></div>;
-          }            
+                        return <div key={idx}></div>;
+                    }
 
-                  if (conversation.latestMessage === undefined) {
-                    return(
-                <div className={style.FriendListContainer} onClick={() => navigate(
-                      "chat/" +
-                        conversation._id +
-                        "&" +
-                        conversation.users[1].name
-                    )} key={idx}>
+                    if (conversation.latestMessage === undefined) {
+                        return (
+                            <div className={style.FriendListContainer} onClick={() => navigate(
+                                "chat/" +
+                                conversation._id +
+                                "&" +
+                                conversation.users[1].name
+                            )} key={idx}>
 
-                    <div className={style.ProfileIcon}>
-                        <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />
-                    </div>
-                    <div className=" flex flex-1 flex-col t text-xs justify-center">
-                        <span className='font-semibold text-gray-600'>{conversation.users[1].name}</span>
-                        <span className='text-xs text-gray-500 '>{"   No previous Messages, click here to start a new chat"}</span>
-                    </div>
-                    {/* <div className="  text-end text-xs text-gray-400   self-end ">
+                                <div className={style.ProfileIcon}>
+                                    <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />
+                                </div>
+                                <div className=" flex flex-1 flex-col t text-xs justify-center">
+                                    <span className='font-semibold text-gray-600'>{conversation.users[1].name}</span>
+                                    <span className='text-xs text-gray-500 '>{"   No previous Messages, click here to start a new chat"}</span>
+                                </div>
+                                {/* <div className="  text-end text-xs text-gray-400   self-end ">
                         {conversation.timeStamp}
                     </div> */}
-                  </div>)}
-                  else{
-                    return(
-                        <div className={style.FriendListContainer} onClick={() => navigate(
-                      "chat/" +
-                        conversation._id +
-                        "&" +
-                        conversation.users[1].name
-                    )} key={idx}>
+                            </div>)
+                    }
+                    else {
+                        return (
+                            <div className={style.FriendListContainer} onClick={() => navigate(
+                                "chat/" +
+                                conversation._id +
+                                "&" +
+                                conversation.users[1].name
+                            )} key={idx}>
 
-                    <div className={style.ProfileIcon}>
-                        <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />
-                    </div>
-                    <div className=" flex flex-1 flex-col t text-xs justify-center">
-                        <span className='font-semibold text-gray-600'>{conversation.users[1].name}</span>
-                        <span className='text-xs text-gray-500 '>                  {conversation.latestMessage.content}
-</span>
-                    </div>
-                    {/* <div className="  text-end text-xs text-gray-400   self-end ">
-                        {conversation.timeStamp}
-                    </div> */}
-                  </div>
-                    )
-                  }
+                                <div className={style.ProfileIcon}>
+                                    <img src="https://cdn-icons-png.freepik.com/512/9203/9203764.png" alt="icon" />
+                                </div>
+                                <div className=" flex flex-1 flex-col t text-xs justify-center">
+                                    <span className='font-semibold text-gray-600'>{conversation.users[1].name}</span>
+                                    <span className='text-xs text-gray-500 '>                  {conversation.latestMessage.content}
+                                    </span>
+                                </div>
+
+                            </div>
+                        )
+                    }
                 })
 
                 }

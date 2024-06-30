@@ -12,7 +12,7 @@ function CreateGroup() {
 
     const nav = useNavigate();
     if (!userData) {
-      console.log("User not Authenticated");
+    
       nav("/");
     }
     const user = userData.data;
