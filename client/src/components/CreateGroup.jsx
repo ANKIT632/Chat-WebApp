@@ -8,18 +8,18 @@ import { useNavigate } from "react-router-dom";
 
 function CreateGroup() {
 
-    const userData = JSON.parse(localStorage.getItem("userData"));
+  const userData = JSON.parse(localStorage.getItem("userData"));
 
-    const nav = useNavigate();
-    if (!userData) {
-    
-      nav("/");
-    }
-    const user = userData.data;
-    const [groupName, setGroupName] = useState("");
-    const [open, setOpen] = React.useState(false);
-  
-    
+  const nav = useNavigate();
+  if (!userData) {
+
+    nav("/");
+  }
+  const user = userData.data;
+  const [groupName, setGroupName] = useState("");
+  const [open, setOpen] = React.useState(false);
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -48,17 +48,17 @@ function CreateGroup() {
     nav("/app/groups");
   };
 
-    return (
-        <div className={style.CreateGroupContainer}>
-            <div className={style.CreateGroupInnerContainer}>
-                <input type='text' placeholder='Create group' className='h-10 outline-none bg-white rounded-lg pl-3' />
-                <MdDoneOutline className={style.icon} onClick={()=>{
-                    handleClickOpen();
-                }} />
+  return (
+    <div className={style.CreateGroupContainer}>
+      <div className={style.CreateGroupInnerContainer}>
+        <input type='text' placeholder='Create group' className='h-10 outline-none bg-white rounded-lg pl-3' />
+        <MdDoneOutline className={style.icon} onClick={() => {
+          handleClickOpen();
+        }} />
 
-            </div>
-        </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default CreateGroup;

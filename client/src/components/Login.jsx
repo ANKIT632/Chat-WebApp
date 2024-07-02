@@ -7,7 +7,7 @@ import {Toaster,toast} from 'react-hot-toast';
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [loading, setLoading] = useState(false);
 
 
